@@ -10,7 +10,7 @@ class FetchExpensesManagerInfo extends Component {
     }
 
     async getExpenses() {
-        const data = await fetch('https://localhost:44312/api/ExpensesManagerInformations');
+        const data = await fetch('https://localhost:5001/api/ExpensesManagerInformations');
         const response = await data.json();
         this.setState({ expenses: response }, () => {  });
     }
@@ -21,7 +21,7 @@ class FetchExpensesManagerInfo extends Component {
 
     deleteLimit(id) {
         if (window.confirm('Are you sure?')) {
-            fetch('https://localhost:44312/api/ExpensesManagerInformations/' + id, {
+            fetch('https://localhost:5001/api/ExpensesManagerInformations/' + id, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',

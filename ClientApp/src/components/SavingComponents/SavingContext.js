@@ -11,7 +11,7 @@ export const SavingProvider = props => {
     const [items, setItems] = useState([]);
 
     const fetchItems = async () => {
-        const data = await fetch('https://localhost:44312/api/SavingsManagerInformations');
+        const data = await fetch('https://localhost:5001/api/SavingsManagerInformations');
 
         const items = await data.json();
         console.log(items);

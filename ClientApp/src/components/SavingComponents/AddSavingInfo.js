@@ -107,7 +107,7 @@ export default class AddSavingInfo extends React.Component {
     }
 
     addSaving(newSaving) {
-        fetch('https://localhost:44312/api/SavingsManagerInformations', {
+        fetch('https://localhost:5001/api/SavingsManagerInformations', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

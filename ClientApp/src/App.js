@@ -15,6 +15,7 @@ import Login from "./components/LoginRegisterComponents/Login";
 import SignUp from "./components/LoginRegisterComponents/Signup";
 import Challenges from "./components/ChallangesComponents/Challenge";
 import Leaderboard from "./components/LeaderboardComponents/Leaderboard";
+import AboutUs from "./components/AboutUs"
 
 export default class App extends Component {
   static displayName = App.name;
@@ -34,6 +35,7 @@ export default class App extends Component {
         <Route path="/BMInfo/:id" exact component={BMInfo} />
         <Route path="/Challenges" exact component={Challenges} />
         <Route path="/Leaderboard" exact component={Leaderboard} />
+        <Route path="/AboutUs" exact component={AboutUs}/>
       </Layout>
     );
   }

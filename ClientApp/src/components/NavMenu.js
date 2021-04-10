@@ -28,6 +28,7 @@ export class NavMenu extends Component {
             <ul id="dropdown" className="dropdown-content">
                 <li><a href="/log-in">Log In</a></li>
                 <li><a href="/sign-up">Sign Up</a></li>
+                <li><a href="/deleteUser">Delete User</a></li>
                 <li className="divider"></li>
                 <li><a href="/BMInfo">Budget Manager</a></li>
                 <li className="divider"></li>

@@ -16,7 +16,7 @@ class EditExpensesInfo extends Component {
 
     async getExpense() {
         let expenseId = this.props.match.params.id;
-        const data = await fetch(`https://localhost:44312/api/ExpensesManagerInformations/${expenseId}`);
+        const data = await fetch(`https://localhost:5001/api/ExpensesManagerInformations/${expenseId}`);
         const response = await data.json();
         this.setState({
             id: response.id,
@@ -54,7 +54,7 @@ class EditExpensesInfo extends Component {
     }
 
     editLimit(newLimit) {
-        fetch(`https://localhost:44312/api/ExpensesManagerInformations/${this.state.id}`, {
+        fetch(`https://localhost:5001/api/ExpensesManagerInformations/${this.state.id}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

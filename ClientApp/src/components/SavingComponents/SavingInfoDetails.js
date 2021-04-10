@@ -29,7 +29,7 @@ class SavingInfoDetails extends Component {
 
     async getSaving() {
         let savingId = this.props.match.params.id;
-        const data = await fetch(`https://localhost:44312/api/SavingsManagerInformations/${savingId}`);
+        const data = await fetch(`https://localhost:5001/api/SavingsManagerInformations/${savingId}`);
         const response = await data.json();
         this.setState({
             id: response.data.id,
@@ -44,7 +44,7 @@ class SavingInfoDetails extends Component {
     }
     async getBalance() {
         let balanceId = this.props.match.params.user_id;
-        const data = await fetch(`https://localhost:44312/api/UserBalance`);
+        const data = await fetch(`https://localhost:5001/api/UserBalance`);
         const response = await data.json();
         this.setState({
             balance: response.data.balance,
@@ -152,7 +152,7 @@ class SavingInfoDetails extends Component {
     };
 
     editSaving(newSaving) {
-        fetch(`https://localhost:44312/api/SavingsManagerInformations/${this.state.id}`, {
+        fetch(`https://localhost:5001/api/SavingsManagerInformations/${this.state.id}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -171,7 +171,7 @@ class SavingInfoDetails extends Component {
     }
 
     editBalance(newSaving) {
-        fetch(`https://localhost:44312/api/UserBalance`, {
+        fetch(`https://localhost:5001/api/UserBalance`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

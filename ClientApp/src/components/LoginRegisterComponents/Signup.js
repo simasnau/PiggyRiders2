@@ -95,7 +95,7 @@ export default class SignUp extends React.Component {
       }
 
 addUser(newUser) {
-    fetch('https://localhost:44312/api/UserInformations', {
+    fetch('https://localhost:5001/api/UserInformations', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

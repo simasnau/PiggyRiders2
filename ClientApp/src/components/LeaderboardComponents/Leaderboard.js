@@ -11,7 +11,7 @@ class Leaderboard extends React.Component {
     }
 
     async getScore() {
-        const data = await fetch('https://localhost:44312/api/UserInformations');
+        const data = await fetch('https://localhost:5001/api/UserInformations');
         const response = await data.json();
         this.setState({ leaderboards: response.data }, () => { });
         console.log(response.data)

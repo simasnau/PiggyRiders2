@@ -1,5 +1,17 @@
 import React, { Component } from "react";
 
+let styles={
+    h3Style:{
+        margin:20
+    },
+    btnStyle:{
+        width:"50%",
+    },
+    divStyle:{
+        textAlign:"center"
+    }
+
+}
 
 export default class DeleteUser extends Component {
 
@@ -19,9 +31,9 @@ export default class DeleteUser extends Component {
 
     render() {
         return (
-        <div>
-            <h3>You are about to delete your account. Are you sure you want to do this?</h3>
-            <button type="submit" className="btn btn-primary btn-block" onClick={this.deleteUser}>
+        <div style={styles.divStyle}>
+            <h3 style={styles.h3Style}>You are about to delete your account. Are you sure you want to do this?</h3>
+            <button style={styles.btnStyle} type="submit" className="btn btn-primary" onClick={this.deleteUser}>
             Yes
             </button>
         </div>

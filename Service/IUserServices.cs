@@ -13,6 +13,8 @@ namespace SmartSaver.Service
         Task<UserInformation> CheckUser(UserInformation newUser);
 
         Task<ServiceResponse<List<UserInformation>>> GetAllUsers(); // WIP, man reikia gauti visus userius - Bartas
+        Task<ServiceResponse<UserInformation>> DeleteUser(int ID);
+
 
     }
 }

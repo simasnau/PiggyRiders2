@@ -88,6 +88,28 @@ namespace SmartSaver.Service
             serviceResponse.Data = await _context.UserInfo.ToListAsync();
             return serviceResponse;
         }
+
+        public async Task<ServiceResponse<UserInformation>> DeleteUser(int ID)
+        {
+            ServiceResponse<UserInformation> serviceResponse = new ServiceResponse<UserInformation>();
+
+            try
+            {
+                _context.EMInfo.RemoveRange(_context.EMInfo.Where(e => e.uID == ID));
+                _context.SMInfo.RemoveRange(_context.SMInfo.Where(e => e.user_id == ID.ToString()));
+                _context.UserAchievement.RemoveRange(_context.UserAchievement.Where(e => e.userID == ID));
+                _context.UserBalance.RemoveRange(_context.UserBalance.Where(e => e.user_id == ID.ToString()));
+                _context.UserBudget.RemoveRange(_context.UserBudget.Where(e => e.userID == ID));
+                _context.UserInfo.RemoveRange(_context.UserInfo.Where(e => e.ID == ID));
+                _context.SaveChanges();
+                serviceResponse.Success = true;
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                serviceResponse.Success = false;
+            }
+            return serviceResponse;
+        }
     }
 
 

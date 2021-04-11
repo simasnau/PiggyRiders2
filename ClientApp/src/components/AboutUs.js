@@ -13,7 +13,6 @@ const pStyle={
     fontSize:24
 }
 
-
 class AboutUs extends Component {
   static displayName = AboutUs.name;
 

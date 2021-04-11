@@ -9,7 +9,7 @@ const SavingList = () => {
 
     const deleteLimit = (id) => {
         if (window.confirm('Are you sure?')) {
-            fetch('https://localhost:44312/api/SavingsManagerInformations/' + id, {
+            fetch('https://localhost:5001/api/SavingsManagerInformations/' + id, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
@@ -26,7 +26,7 @@ const SavingList = () => {
     const [balance, setBalance] = useState('');
 
     const fetchBalance = async () => {
-        const data = await fetch(`https://localhost:44312/api/UserBalance`);
+        const data = await fetch(`https://localhost:5001/api/UserBalance`);
 
         const balance = await data.json();
         console.log(balance);

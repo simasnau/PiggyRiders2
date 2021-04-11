@@ -18,7 +18,7 @@ export const GlobalProvider = ({ children }) => {
 
     // Actions
     async function getTransactions() {
-        const data = await fetch('https://localhost:44312/api/UserBudgets');
+        const data = await fetch('https://localhost:5001/api/UserBudgets');
         const response = await data.json();
         dispatch({
             type: 'GET_TRANSACTION',
@@ -27,7 +27,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     async function getExpenses() {
-        const data = await fetch('https://localhost:44312/api/UserBudgets/expenses');
+        const data = await fetch('https://localhost:5001/api/UserBudgets/expenses');
         const response = await data.json();
         dispatch({
             type: 'GET_EXPENSES',
@@ -36,7 +36,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     async function getBalance() {
-        const data = await fetch(`https://localhost:44312/api/UserBalance`);
+        const data = await fetch(`https://localhost:5001/api/UserBalance`);
         const response = await data.json();
         dispatch({
             type: 'GET_BALANCE',
@@ -45,7 +45,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
         async function getIncomes() {
-            const data = await fetch('https://localhost:44312/api/UserBudgets/incomes');
+            const data = await fetch('https://localhost:5001/api/UserBudgets/incomes');
             const response = await data.json();
             dispatch({
                 type: 'GET_INCOMES',
@@ -55,7 +55,7 @@ export const GlobalProvider = ({ children }) => {
 
         async function addTransaction(transaction) {
             if (transaction.amount < 0) {
-                fetch('https://localhost:44312/api/ExpensesManagerInformations', {
+                fetch('https://localhost:5001/api/ExpensesManagerInformations', {
                     method: 'PUT',
                     headers: {
                         'Accept': 'application/json',
@@ -69,7 +69,7 @@ export const GlobalProvider = ({ children }) => {
                     })
                 })
             }
-            fetch('https://localhost:44312/api/UserBalance', {
+            fetch('https://localhost:5001/api/UserBalance', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -80,7 +80,7 @@ export const GlobalProvider = ({ children }) => {
                     remove: (transaction.amount < 0) ? transaction.amount * -1 : 0
                 })
             })
-            fetch('https://localhost:44312/api/UserBudgets', {
+            fetch('https://localhost:5001/api/UserBudgets', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

@@ -14,7 +14,7 @@ export class EditAchievementInfo extends Component {
 
     async getAchievement(id) {
         let AchievementId = id;
-        const data = await fetch(`https://localhost:44312/api/UserAchievement/${AchievementId}`);
+        const data = await fetch(`https://localhost:5001/api/UserAchievement/${AchievementId}`);
         const response = await data.json();
         this.setState({
             id: response.data.id,
@@ -29,7 +29,7 @@ export class EditAchievementInfo extends Component {
     }
 
     completeChallenge(challengeId, newStatus) {
-        fetch(`https://localhost:44312/api/UserAchievement/${this.state.id}`, {
+        fetch(`https://localhost:5001/api/UserAchievement/${this.state.id}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

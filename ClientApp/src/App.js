@@ -15,6 +15,7 @@ import Login from "./components/LoginRegisterComponents/Login";
 import SignUp from "./components/LoginRegisterComponents/Signup";
 import Challenges from "./components/ChallangesComponents/Challenge";
 import Leaderboard from "./components/LeaderboardComponents/Leaderboard";
+import AboutUs from "./components/AboutUs"
 
 export default class App extends Component {
   static displayName = App.name;
@@ -24,7 +25,7 @@ export default class App extends Component {
       <Layout>
       <Route path="/log-in" excat component={Login} />
        <Route path="/sign-up" exact component={SignUp} />
-        <Route exact path='/' exact component={Home} />
+        <Route exact path='/' exact component={AboutUs} />
         <Route path='/ExpensesManagerInformations' exact component={FetchExpensesManagerInfo} />
         <Route path="/ExpensesManagerInformations/add" excat component={AddLimit} />
         <Route path="/ExpensesManagerInformations/edit/:id" excat component={EditExpensesInfo} />

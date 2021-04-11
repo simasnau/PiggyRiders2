@@ -29,7 +29,7 @@ class AddLimit extends Component {
     }
 
     addLimit(newLimit) {
-        fetch('https://localhost:44312/api/ExpensesManagerInformations', {
+        fetch('https://localhost:5001/api/ExpensesManagerInformations', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

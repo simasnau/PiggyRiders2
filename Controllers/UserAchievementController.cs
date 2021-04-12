@@ -30,8 +30,8 @@ namespace SmartSaver.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserAchievement>>> Get()
         {
-            await _achievementService.UpdateAchievement(_jWTService.GetID());
-            return Ok(await _achievementService.GetAllAchievements(_jWTService.GetID()));
+            await _achievementService.UpdateAchievement(_jWTService.GetID(Request.Cookies["token"]));
+            return Ok(await _achievementService.GetAllAchievements(_jWTService.GetID(Request.Cookies["token"])));
         }
 
         // GET: api/UserAchievement/5
@@ -46,7 +46,7 @@ namespace SmartSaver.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateAchievement(int id)
         {
-            ServiceResponse<UserAchievement> response = await _achievementService.UpdateAchievement(_jWTService.GetID());
+            ServiceResponse<UserAchievement> response = await _achievementService.UpdateAchievement(_jWTService.GetID(Request.Cookies["token"]));
             if (response.Data == null)
             {
                 return NotFound(response);

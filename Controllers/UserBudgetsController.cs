@@ -17,6 +17,7 @@ namespace SmartSaver.Controllers
         public UserBudgetsController(IBudgetService service)
         {
             this.service = service;
+            this.service.cookie = Request.Cookies["token"];
         }
 
         [HttpGet]

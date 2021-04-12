@@ -67,15 +67,15 @@ namespace SmartSaver.Service
                 return user;
             }
         }
-        public string GetID()
-        {
-            return token.Claims.First(claim => claim.Type == "sub").Value;
-
+        public string GetID(string cookie)
+        {           
+            var jsonToken = new JwtSecurityTokenHandler().ReadToken(cookie) as JwtSecurityToken;
+            return jsonToken.Claims.First(claim => claim.Type == "sub").Value;
         }
-        public string GetUsername()
+        public string GetUsername(string cookie)
         {
-            return token.Claims.First(claim => claim.Type == "unique_name").Value;
-
+            var jsonToken = new JwtSecurityTokenHandler().ReadToken(cookie) as JwtSecurityToken;
+            return jsonToken.Claims.First(claim => claim.Type == "unique_name").Value;
         }
 
 

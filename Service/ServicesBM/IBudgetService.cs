@@ -13,5 +13,6 @@ namespace SmartSaver.Service.ServicesBM
         
         Task<int> GetExpenses();
         Task<int> GetIncomes();
+        string cookie { get; set; }
     }
 }

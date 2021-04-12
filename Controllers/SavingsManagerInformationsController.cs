@@ -28,7 +28,7 @@ namespace SmartSaver.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SavingsManagerInformation>>> Get()
         {
-            return Ok(await _savingService.GetAllSavings(_jWTService.GetID()));
+            return Ok(await _savingService.GetAllSavings(_jWTService.GetID(Request.Cookies["token"])));
         }
 
         // GET: api/SavingsManagerInformations/5
@@ -61,7 +61,7 @@ namespace SmartSaver.Controllers
         [HttpPost]
         public async Task<ActionResult<SavingsManagerInformation>> PostSavingsManagerInformation(SavingsManagerInformation newSaving)
         {
-            newSaving.user_id = _jWTService.GetID();
+            newSaving.user_id = _jWTService.GetID(Request.Cookies["token"]);
             return Ok(await _savingService.AddSaving(newSaving));
         }
 

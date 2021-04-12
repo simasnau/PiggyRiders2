@@ -19,6 +19,7 @@ namespace SmartSaver.Controllers
         public ExpensesManagerInformationsController(ILimitsService service)
         {
             this.service = service;
+            this.service.cookie = Request.Cookies["token"];
         }
 
         // GET: api/ExpensesManagerInformations

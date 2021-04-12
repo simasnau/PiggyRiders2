@@ -21,10 +21,14 @@ namespace SmartSaver.Controllers
     public class UserInformationsController : ControllerBase
     {
         private readonly IUserServices _userService;
+        private readonly IJWTService _JWTService;
 
-        public UserInformationsController(IUserServices userService)
+
+        public UserInformationsController(IUserServices userService, IJWTService jwtService)
         {
             _userService = userService;
+            _JWTService = jwtService;
+
         }
 
         // POST: api/UserInformations
@@ -47,6 +51,24 @@ namespace SmartSaver.Controllers
         public async Task<ActionResult<IEnumerable<UserInformation>>> Get()
         {
             return Ok(await _userService.GetAllUsers());
+        }
+
+        // DELETE: api/UserInformations
+        [HttpDelete]
+        public async Task<ActionResult<UserInformation>> DeleteUser()
+        {
+            var ID =Int32.Parse(_JWTService.GetID());
+
+            var check = await _userService.DeleteUser(ID);
+            if (check.Success)
+            {
+                return Ok(check);
+            }
+            else
+            {
+                return BadRequest();
+            }
+
         }
     }
 }

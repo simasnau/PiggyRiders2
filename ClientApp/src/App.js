@@ -13,6 +13,7 @@ import './custom.css'
 import BMInfo from "./components/BudgetManagerComponents/BMInfo";
 import Login from "./components/LoginRegisterComponents/Login";
 import SignUp from "./components/LoginRegisterComponents/Signup";
+import DeleteUser from "./components/LoginRegisterComponents/DeleteUser";
 import Challenges from "./components/ChallangesComponents/Challenge";
 import Leaderboard from "./components/LeaderboardComponents/Leaderboard";
 import AboutUs from "./components/AboutUs"
@@ -35,6 +36,7 @@ export default class App extends Component {
         <Route path="/BMInfo/:id" exact component={BMInfo} />
         <Route path="/Challenges" exact component={Challenges} />
         <Route path="/Leaderboard" exact component={Leaderboard} />
+        <Route path="/deleteUser" exact component={DeleteUser}/>
       </Layout>
     );
   }

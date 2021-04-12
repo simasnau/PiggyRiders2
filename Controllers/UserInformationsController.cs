@@ -57,17 +57,22 @@ namespace SmartSaver.Controllers
         [HttpDelete]
         public async Task<ActionResult<UserInformation>> DeleteUser()
         {
-            var ID =Int32.Parse(_JWTService.GetID(Request.Cookies["token"]));
-
-            var check = await _userService.DeleteUser(ID);
-            if (check.Success)
+            try
             {
-                return Ok(check);
-            }
-            else
+                var ID = Int32.Parse(_JWTService.GetID(Request.Cookies["token"]));
+                var check = await _userService.DeleteUser(ID);
+                if (check.Success)
+                {
+                    return Ok(check);
+                }
+                else return BadRequest();
+            }catch(Exception ex)
             {
+                Console.WriteLine("Unable to delete user, exception: " + ex);
                 return BadRequest();
             }
+
+
 
         }
     }

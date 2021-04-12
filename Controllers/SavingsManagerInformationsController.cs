@@ -62,7 +62,8 @@ namespace SmartSaver.Controllers
         public async Task<ActionResult<SavingsManagerInformation>> PostSavingsManagerInformation(SavingsManagerInformation newSaving)
         {
             newSaving.user_id = _jWTService.GetID(Request.Cookies["token"]);
-            return Ok(await _savingService.AddSaving(newSaving));
+            if (newSaving.user_id == null) return BadRequest();
+            else return Ok(await _savingService.AddSaving(newSaving));
         }
 
         // DELETE: api/SavingsManagerInformations/5

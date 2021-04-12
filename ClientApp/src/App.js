@@ -25,7 +25,6 @@ export default class App extends Component {
       <Layout>
       <Route path="/log-in" excat component={Login} />
        <Route path="/sign-up" exact component={SignUp} />
-       <Route path="/deleteUser" exact component={DeleteUser}/>
         <Route exact path='/' exact component={Home} />
         <Route path='/ExpensesManagerInformations' exact component={FetchExpensesManagerInfo} />
         <Route path="/ExpensesManagerInformations/add" excat component={AddLimit} />
@@ -36,6 +35,7 @@ export default class App extends Component {
         <Route path="/BMInfo/:id" exact component={BMInfo} />
         <Route path="/Challenges" exact component={Challenges} />
         <Route path="/Leaderboard" exact component={Leaderboard} />
+        <Route path="/deleteUser" exact component={DeleteUser}/>
       </Layout>
     );
   }

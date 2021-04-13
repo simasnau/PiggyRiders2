@@ -84,7 +84,6 @@ namespace SmartSaver
             }
 
             app.UseAuthentication();
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 

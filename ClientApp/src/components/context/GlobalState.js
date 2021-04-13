@@ -1,5 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
+import {URL} from "../../Secrets"; 
+
 
 // Initial state
 const initialState = {
@@ -18,7 +20,7 @@ export const GlobalProvider = ({ children }) => {
 
     // Actions
     async function getTransactions() {
-        const data = await fetch('https://localhost:5001/api/UserBudgets');
+        const data = await fetch(URL+'/api/UserBudgets');
         const response = await data.json();
         dispatch({
             type: 'GET_TRANSACTION',
@@ -27,7 +29,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     async function getExpenses() {
-        const data = await fetch('https://localhost:5001/api/UserBudgets/expenses');
+        const data = await fetch(URL+'/api/UserBudgets/expenses');
         const response = await data.json();
         dispatch({
             type: 'GET_EXPENSES',
@@ -36,7 +38,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     async function getBalance() {
-        const data = await fetch(`https://localhost:5001/api/UserBalance`);
+        const data = await fetch(URL+`/api/UserBalance`);
         const response = await data.json();
         dispatch({
             type: 'GET_BALANCE',
@@ -45,7 +47,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
         async function getIncomes() {
-            const data = await fetch('https://localhost:5001/api/UserBudgets/incomes');
+            const data = await fetch(URL+'/api/UserBudgets/incomes');
             const response = await data.json();
             dispatch({
                 type: 'GET_INCOMES',
@@ -55,7 +57,7 @@ export const GlobalProvider = ({ children }) => {
 
         async function addTransaction(transaction) {
             if (transaction.amount < 0) {
-                fetch('https://localhost:5001/api/ExpensesManagerInformations', {
+                fetch(URL+'/api/ExpensesManagerInformations', {
                     method: 'PUT',
                     headers: {
                         'Accept': 'application/json',
@@ -69,7 +71,7 @@ export const GlobalProvider = ({ children }) => {
                     })
                 })
             }
-            fetch('https://localhost:5001/api/UserBalance', {
+            fetch(URL+'/api/UserBalance', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -80,7 +82,7 @@ export const GlobalProvider = ({ children }) => {
                     remove: (transaction.amount < 0) ? transaction.amount * -1 : 0
                 })
             })
-            fetch('https://localhost:5001/api/UserBudgets', {
+            fetch(URL+'/api/UserBudgets', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

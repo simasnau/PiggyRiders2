@@ -1,6 +1,8 @@
 ﻿import { match } from 'assert';
 import React, { useState, useEffect, Component } from 'react';
 import { Link } from 'react-router-dom';
+import {URL} from "../../Secrets"; 
+
 
 class SavingInfoDetails extends Component {
 
@@ -29,7 +31,7 @@ class SavingInfoDetails extends Component {
 
     async getSaving() {
         let savingId = this.props.match.params.id;
-        const data = await fetch(`https://localhost:5001/api/SavingsManagerInformations/${savingId}`);
+        const data = await fetch(URL+`/api/SavingsManagerInformations/${savingId}`);
         const response = await data.json();
         this.setState({
             id: response.data.id,
@@ -44,7 +46,7 @@ class SavingInfoDetails extends Component {
     }
     async getBalance() {
         let balanceId = this.props.match.params.user_id;
-        const data = await fetch(`https://localhost:5001/api/UserBalance`);
+        const data = await fetch(URL+`/api/UserBalance`);
         const response = await data.json();
         this.setState({
             balance: response.data.balance,
@@ -152,7 +154,7 @@ class SavingInfoDetails extends Component {
     };
 
     editSaving(newSaving) {
-        fetch(`https://localhost:5001/api/SavingsManagerInformations/${this.state.id}`, {
+        fetch(URL+`/api/SavingsManagerInformations/${this.state.id}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -171,7 +173,7 @@ class SavingInfoDetails extends Component {
     }
 
     editBalance(newSaving) {
-        fetch(`https://localhost:5001/api/UserBalance`, {
+        fetch(URL+`/api/UserBalance`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

@@ -5,6 +5,7 @@ import ChallangeCard from './ChallangeCard';
 import './styles.css'
 import uncompletedChallenge from './imgUncompleted.png';
 import completedChallenge from './imgCompleted.jpg';
+import {URL} from "../../Secrets"; 
 
 class Challenges extends React.Component {
 
@@ -16,7 +17,7 @@ class Challenges extends React.Component {
     }
 
     async getAchievements() {
-        const data = await fetch('https://localhost:5001/api/UserAchievement');
+        const data = await fetch(URL+'/api/UserAchievement');
         const response = await data.json();
         this.setState({ achievements: response.data }, () => { });
         console.log(response.data)

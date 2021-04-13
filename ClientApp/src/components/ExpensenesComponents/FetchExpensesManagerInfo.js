@@ -1,5 +1,7 @@
 ﻿import React, { useState, useEffect, Component } from 'react';
 import { Link } from 'react-router-dom';
+import {URL} from "../../Secrets"; 
+
 class FetchExpensesManagerInfo extends Component {
 
     constructor() {
@@ -10,7 +12,7 @@ class FetchExpensesManagerInfo extends Component {
     }
 
     async getExpenses() {
-        const data = await fetch('https://localhost:5001/api/ExpensesManagerInformations');
+        const data = await fetch(URL+'/api/ExpensesManagerInformations');
         const response = await data.json();
         this.setState({ expenses: response }, () => {  });
     }
@@ -21,7 +23,7 @@ class FetchExpensesManagerInfo extends Component {
 
     deleteLimit(id) {
         if (window.confirm('Are you sure?')) {
-            fetch('https://localhost:5001/api/ExpensesManagerInformations/' + id, {
+            fetch(URL+'/api/ExpensesManagerInformations/' + id, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',

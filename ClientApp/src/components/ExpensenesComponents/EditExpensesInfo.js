@@ -1,5 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {URL} from "../../Secrets"; 
+
 
 class EditExpensesInfo extends Component {
 
@@ -16,7 +18,7 @@ class EditExpensesInfo extends Component {
 
     async getExpense() {
         let expenseId = this.props.match.params.id;
-        const data = await fetch(`https://localhost:5001/api/ExpensesManagerInformations/${expenseId}`);
+        const data = await fetch(URL+`/api/ExpensesManagerInformations/${expenseId}`);
         const response = await data.json();
         this.setState({
             id: response.id,
@@ -54,7 +56,7 @@ class EditExpensesInfo extends Component {
     }
 
     editLimit(newLimit) {
-        fetch(`https://localhost:5001/api/ExpensesManagerInformations/${this.state.id}`, {
+        fetch(URL+`/api/ExpensesManagerInformations/${this.state.id}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

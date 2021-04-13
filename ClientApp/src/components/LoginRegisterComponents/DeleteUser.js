@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {URL} from "../../Secrets";
 
 let styles={
     h3Style:{
@@ -17,7 +18,7 @@ export default class DeleteUser extends Component {
 
     deleteUser =()=> {
         alert("User will be deleted");
-        fetch("https://localhost:5001/api/UserInformations", {method: "DELETE"}).then(response=>{
+        fetch(URL+"/api/UserInformations", {method: "DELETE"}).then(response=>{
             response.json().then(data=>{
                 if(data.success){
                     alert("Request returned ok");

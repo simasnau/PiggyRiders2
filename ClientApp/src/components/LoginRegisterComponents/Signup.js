@@ -1,5 +1,7 @@
 import React, {Component } from 'react';
 import './passValidation.css';
+import {URL} from "../../Secrets"; 
+
 
 export default class SignUp extends React.Component {
     constructor() {
@@ -95,7 +97,7 @@ export default class SignUp extends React.Component {
       }
 
 addUser(newUser) {
-    fetch('https://localhost:5001/api/UserInformations', {
+    fetch(URL+'/api/UserInformations', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

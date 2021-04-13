@@ -1,5 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {URL} from "../../Secrets"; 
+
 
 export class EditAchievementInfo extends Component {
 
@@ -14,7 +16,7 @@ export class EditAchievementInfo extends Component {
 
     async getAchievement(id) {
         let AchievementId = id;
-        const data = await fetch(`https://localhost:5001/api/UserAchievement/${AchievementId}`);
+        const data = await fetch(URL+`/api/UserAchievement/${AchievementId}`);
         const response = await data.json();
         this.setState({
             id: response.data.id,
@@ -29,7 +31,7 @@ export class EditAchievementInfo extends Component {
     }
 
     completeChallenge(challengeId, newStatus) {
-        fetch(`https://localhost:5001/api/UserAchievement/${this.state.id}`, {
+        fetch(URL+`/api/UserAchievement/${this.state.id}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

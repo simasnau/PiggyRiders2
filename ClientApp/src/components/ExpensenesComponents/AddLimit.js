@@ -1,5 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {URL} from "../../Secrets"; 
+
 
 class AddLimit extends Component {
 
@@ -29,7 +31,7 @@ class AddLimit extends Component {
     }
 
     addLimit(newLimit) {
-        fetch('https://localhost:5001/api/ExpensesManagerInformations', {
+        fetch(URL+'/api/ExpensesManagerInformations', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {URL} from "./../../Secrets";
 
 var token = "";
 
@@ -15,7 +16,7 @@ export default class Login extends Component {
   }
 
   getUser(newUser) {
-    fetch("https://localhost:5001/api/Login", {
+    fetch(URL+"/api/Login", {
       method: "POST",
       headers: {
         Accept: "application/json",

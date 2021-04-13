@@ -2,14 +2,14 @@
 import { SavingContext } from './SavingContext';
 import { Route } from 'react-router-dom';
 import { Button } from 'reactstrap';
-//import DeleteSaving from './DeleteSaving';
+import {URL} from "../../Secrets"; 
 
 const SavingList = () => {
     const [items, setItems] = useContext(SavingContext);
 
     const deleteLimit = (id) => {
         if (window.confirm('Are you sure?')) {
-            fetch('https://localhost:5001/api/SavingsManagerInformations/' + id, {
+            fetch(URL+'/api/SavingsManagerInformations/' + id, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
@@ -26,7 +26,7 @@ const SavingList = () => {
     const [balance, setBalance] = useState('');
 
     const fetchBalance = async () => {
-        const data = await fetch(`https://localhost:5001/api/UserBalance`);
+        const data = await fetch(URL+`/api/UserBalance`);
 
         const balance = await data.json();
         console.log(balance);

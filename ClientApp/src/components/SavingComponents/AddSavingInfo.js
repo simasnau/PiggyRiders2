@@ -2,6 +2,8 @@
 import { SavingContext } from './SavingContext';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {URL} from "../../Secrets"; 
+
 
 export default class AddSavingInfo extends React.Component {
     constructor() {
@@ -107,7 +109,7 @@ export default class AddSavingInfo extends React.Component {
     }
 
     addSaving(newSaving) {
-        fetch('https://localhost:5001/api/SavingsManagerInformations', {
+        fetch(URL+'/api/SavingsManagerInformations', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -9,16 +9,15 @@ export class NavMenu extends Component {
 
   constructor (props) {
     super(props);
-
+    this.loggedIn=document.cookie.includes("token=");
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       collapsed: true
     };
   }
   
-  loggedIn=document.cookie.includes("token=");
-
   toggleNavbar () {
+    this.loggedIn=document.cookie.includes("token=");
     this.setState({
       collapsed: !this.state.collapsed
     });
@@ -53,7 +52,7 @@ export class NavMenu extends Component {
                 <div className="nav-wrapper">
                     <a href="/" className="brand-logo">Smart Saver</a>
                     <ul className="right hide-on-med-and-down">
-                        <li><a className="dropdown-trigger" href="#!" data-target="dropdown">Menu</a></li>
+                        <li><a className="dropdown-trigger" href="#!" onClick={this.toggleNavbar} data-target="dropdown">Menu</a></li>
                     </ul>
                 </div>
             </nav>

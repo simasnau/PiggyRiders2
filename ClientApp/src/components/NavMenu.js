@@ -9,6 +9,7 @@ export class NavMenu extends Component {
 
   constructor (props) {
     super(props);
+    this.logoutClick = this.logoutClick.bind(this);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
@@ -20,6 +21,11 @@ export class NavMenu extends Component {
     this.setState({
       collapsed: !this.state.collapsed
     });
+  }
+
+  logoutClick(e) {
+    e.preventDefault();
+    alert('Log Out was clicked.');
   }
 
   render () {
@@ -44,6 +50,7 @@ export class NavMenu extends Component {
             <nav className = "pink">
                 <div className="nav-wrapper">
                     <a href="/" className="brand-logo">Smart Saver</a>
+                    <a href="#" onClick={this.logoutClick} className="right">Log Out</a>
                     <ul className="right hide-on-med-and-down">
                         <li><a className="dropdown-trigger" href="#!" data-target="dropdown">Menu</a></li>
                     </ul>

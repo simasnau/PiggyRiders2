@@ -15,6 +15,7 @@ namespace SmartSaver.Services
         Task Add(ExpensesManagerInformation expense);
         Task Delete(int id);
         Task EditFromBudgetManager(ExpensesManagerInformation expense);
+        string cookie { get; set; }
 
 
     }

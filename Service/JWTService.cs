@@ -67,15 +67,39 @@ namespace SmartSaver.Service
                 return user;
             }
         }
-        public string GetID()
+        public string GetID(string cookie)
         {
-            return token.Claims.First(claim => claim.Type == "sub").Value;
+            try
+            {
+                var jsonToken = new JwtSecurityTokenHandler().ReadToken(cookie) as JwtSecurityToken;
+                if (jsonToken.ValidTo > DateTime.UtcNow)
+                {
+                    return jsonToken.Claims.First(claim => claim.Type == "sub").Value;
+                }
+                else return null;
 
+            }catch(Exception ex)
+            {
+                Console.WriteLine("Unable to get ID from cookie: " + cookie+"\nException occured: "+ex);
+                return null;
+            }
         }
-        public string GetUsername()
+        public string GetUsername(string cookie)
         {
-            return token.Claims.First(claim => claim.Type == "unique_name").Value;
+            try
+            {
+                var jsonToken = new JwtSecurityTokenHandler().ReadToken(cookie) as JwtSecurityToken;
+                if (jsonToken.ValidTo > DateTime.UtcNow)
+                {
+                    return jsonToken.Claims.First(claim => claim.Type == "unique_name").Value;
+                }
+                else return null;
 
+            }catch(Exception ex)
+            {
+                Console.WriteLine("Unable to get Username from cookie: " + cookie + "\nException occured: " + ex);
+                return null;
+            }
         }
 
 

@@ -30,7 +30,7 @@ namespace SmartSaver.Controllers
         [HttpGet]
         public async Task<ActionResult<UserBalance>> GetSingle()
         {
-            ServiceResponse<UserBalance> response = await _balanceService.GetBalanceByUserId(_jWTService.GetID());
+            ServiceResponse<UserBalance> response = await _balanceService.GetBalanceByUserId(_jWTService.GetID(Request.Cookies["token"]));
             if (response.Data == null)
             {
                 return NotFound(response);
@@ -40,7 +40,7 @@ namespace SmartSaver.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateBalance(UserBalance updatedBalance)
         {
-            ServiceResponse<UserBalance> response = await _balanceService.UpdateBalance(updatedBalance, _jWTService.GetID());
+            ServiceResponse<UserBalance> response = await _balanceService.UpdateBalance(updatedBalance, _jWTService.GetID(Request.Cookies["token"]));
             if (response.Data == null)
             {
                 return NotFound(response);

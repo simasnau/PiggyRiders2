@@ -12,6 +12,7 @@ namespace SmartSaver.Service.ServicesBM
     {
         private readonly UserContext context;
         private readonly IJWTService service;
+        public string cookie { get; set; }
         public BudgetService(UserContext context, IJWTService service)
         {
             this.context = context;
@@ -65,7 +66,7 @@ namespace SmartSaver.Service.ServicesBM
         private int UserID()
         {
             int userID;
-            bool convertable = Int32.TryParse(service.GetID(), out userID);
+            bool convertable = Int32.TryParse(service.GetID(cookie), out userID);
             if (convertable)
                 return userID;
             else throw new Exception("Invalid user id");

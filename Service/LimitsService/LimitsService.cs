@@ -13,6 +13,7 @@ namespace SmartSaver.Services
     {
         private readonly UserContext context;
         private readonly IJWTService service;
+        public string cookie { get; set; }
         public LimitsService(UserContext context, IJWTService service)
         {
             this.context = context;
@@ -93,7 +94,7 @@ namespace SmartSaver.Services
         private int UserID()
         {
             int userID;
-            bool convertable = Int32.TryParse(service.GetID(), out userID);
+            bool convertable = Int32.TryParse(service.GetID(cookie), out userID);
             if (convertable)
                 return userID;
             else throw new Exception("Invalid user id");

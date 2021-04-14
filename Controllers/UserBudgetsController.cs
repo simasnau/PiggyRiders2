@@ -17,6 +17,12 @@ namespace SmartSaver.Controllers
         public UserBudgetsController(IBudgetService service)
         {
             this.service = service;
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
+
         }
 
         [HttpGet]

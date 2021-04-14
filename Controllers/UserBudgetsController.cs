@@ -17,23 +17,27 @@ namespace SmartSaver.Controllers
         public UserBudgetsController(IBudgetService service)
         {
             this.service = service;
-            if (Request.Cookies.Keys.Contains("token"))
-            {
-                this.service.cookie = Request.Cookies["token"];
-            }
-            else this.service.cookie = null;
-
         }
 
         [HttpGet]
         public async Task<List<UserBudget>> GetBMInfo()
         {
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
             var all = await service.GetAll();
             return all;
         }
         [HttpGet("expenses")]
-        public async Task <int> GetExpenses()
+        public async Task<int> GetExpenses()
         {
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
             var expenses = await service.GetExpenses();
             return expenses;
         }
@@ -41,6 +45,11 @@ namespace SmartSaver.Controllers
         [HttpGet("incomes")]
         public async Task<int> GetIncomes()
         {
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
             var incomes = await service.GetIncomes();
             return incomes;
         }
@@ -48,6 +57,11 @@ namespace SmartSaver.Controllers
         [HttpPost]
         public async Task<ActionResult<UserBudget>> PostUserIncome(UserBudget budget)
         {
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
             await service.Add(budget);
             return NoContent();
         }

@@ -1,0 +1,20 @@
+version: "3.4"
+
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=
+    ports:
+      - "1433:1433"
+
+  smartsaver:
+    ports:
+      - "5001:5001"
+      - "5000:5000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db

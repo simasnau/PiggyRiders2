@@ -18,22 +18,28 @@ namespace SmartSaver
         {
             var host = CreateHostBuilder(args).Build();
 
-            using var scope = host.Services.CreateScope();
-            var services = scope.ServiceProvider;
-
-            try
+            Task.Run(async () =>
             {
-                var dbContext = services.GetRequiredService<UserContext>();
-                if (dbContext.Database.IsSqlServer())
+                using (var scope = host.Services.CreateScope())
                 {
-                    dbContext.Database.Migrate();
+                    var services = scope.ServiceProvider;
+                    await waitForDb(services);
+
+                    try
+                    {
+                        var dbContext = services.GetRequiredService<UserContext>();
+                        if (dbContext.Database.IsSqlServer())
+                        {
+                            dbContext.Database.Migrate();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                        logger.LogError(ex, "An error occurred while migrating or seeding the database.");
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-                logger.LogError(ex, "An error occurred while migrating or seeding the database.");
-            }
+            }).Wait();
 
             host.Run();
 
@@ -45,5 +51,21 @@ namespace SmartSaver
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+        private static async Task waitForDb(IServiceProvider services)
+        {
+            var healthChecker = services.GetRequiredService<UserContext>();
+            var maxAttemps = 12;
+            var delay = 5000;
+
+            for (int i = 0; i < maxAttemps; i++)
+            {
+                if (healthChecker.Database.CanConnect())
+                {
+                    return;
+                }
+                await Task.Delay(delay);
+            }
+
+        }
     }
 }

@@ -21,6 +21,7 @@ export default class DeleteUser extends Component {
         fetch(URL+"/api/UserInformations", {method: "DELETE"}).then(response=>{
             response.json().then(data=>{
                 if(data.success){
+                    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                     alert("Request returned ok");
                     this.props.history.push("/log-in");
                 }else {

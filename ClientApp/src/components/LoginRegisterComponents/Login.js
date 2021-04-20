@@ -30,8 +30,10 @@ export default class Login extends Component {
       console.log(response);
 
       if (response.ok) {
-        response.json().then(data => document.cookie="token="+data.token)        
-        this.props.history.push("/SavingsManagerInformations");
+        response.json().then(data => {
+          document.cookie="token="+data.token; 
+          this.props.history.push("/SavingsManagerInformations");
+        })
       } else {
         console.log(response.ok);
         alert("Failed to login, try signing up");

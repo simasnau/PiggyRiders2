@@ -19,17 +19,17 @@ namespace SmartSaver.Controllers
         public ExpensesManagerInformationsController(ILimitsService service)
         {
             this.service = service;
-            if (Request.Cookies.Keys.Contains("token"))
-            {
-                this.service.cookie = Request.Cookies["token"];
-            }
-            else this.service.cookie = null;
         }
 
         // GET: api/ExpensesManagerInformations
         [HttpGet]
         public async Task<List<ExpensesManagerInformation>> GetEMInfo()
         {
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
             var all = await service.GetAll();
             return all;
         }
@@ -38,6 +38,11 @@ namespace SmartSaver.Controllers
         [HttpGet("{id}")]
         public async Task<ExpensesManagerInformation> GetExpensesManagerInformation(int id)
         {
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
             var byId = await service.GetById(id);
             return byId;
 
@@ -47,6 +52,11 @@ namespace SmartSaver.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutExpensesManagerInformation(int id, ExpensesManagerInformation expensesManagerInformation)
         {
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
             if (id != expensesManagerInformation.ID)
                 return BadRequest();
             await service.Edit(expensesManagerInformation, id);
@@ -54,8 +64,13 @@ namespace SmartSaver.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutFromBudgetManager (ExpensesManagerInformation expensesManagerInformation)
+        public async Task<IActionResult> PutFromBudgetManager(ExpensesManagerInformation expensesManagerInformation)
         {
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
             await service.EditFromBudgetManager(expensesManagerInformation);
             return NoContent();
         }
@@ -64,6 +79,11 @@ namespace SmartSaver.Controllers
         [HttpPost]
         public async Task<ActionResult<ExpensesManagerInformation>> PostExpensesManagerInformation(ExpensesManagerInformation expensesManagerInformation)
         {
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
             await service.Add(expensesManagerInformation);
             return NoContent();
         }
@@ -74,10 +94,15 @@ namespace SmartSaver.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExpensesManagerInformation(int id)
         {
-           await service.Delete(id);
-           return NoContent();
+            if (Request.Cookies.Keys.Contains("token"))
+            {
+                this.service.cookie = Request.Cookies["token"];
+            }
+            else this.service.cookie = null;
+            await service.Delete(id);
+            return NoContent();
         }
     }
 
 
-    }
+}

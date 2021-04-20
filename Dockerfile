@@ -15,5 +15,4 @@ RUN dotnet publish "SmartSaver.csproj" -c Release -o /src/publish
 EXPOSE 5000
 EXPOSE 5001
 WORKDIR /src/publish
-CMD ["dotnet", "ef", "--project", "../Persistence", "database", "update"]
 ENTRYPOINT ["dotnet", "SmartSaver.dll", "--urls", "http://*:5000", "https://*:5001"]

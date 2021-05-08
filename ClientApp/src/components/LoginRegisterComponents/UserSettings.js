@@ -5,23 +5,53 @@ var token = "";
 
 export default class UserSettings extends Component {
   onChangeUsername(e) {
+    e.preventDefault();
 
     const newUser = {
       username: this.refs.username.value,
     };
 
     console.log(newUser)
-    e.preventDefault();
+    this.updateUser(newUser)
   }
   onChangePassword(e) {
-
+    e.preventDefault();
+    
     const newUser = {
       password: this.refs.password.value,
       confPassword: this.refs.confirmedPassword.value
     };
 
+    
+    if(newUser.password!=newUser.confPassword){
+      alert("Passwords dont match")
+      return
+    }
+    
+    if (!newUser.password.match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
+      alert("Please enter strong and secure password")
+      return
+    }
+  
     console.log(newUser)
-    e.preventDefault();
+    this.updateUser(newUser)
+  }
+
+  updateUser(newUser){
+    fetch(URL+"/api/UserInformations", {
+      method: 'PUT',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          Username: newUser.username,
+          Password: newUser.password
+      })
+    }).then(response => {
+      console.log(response)
+        })    
+
   }
 
   render() {

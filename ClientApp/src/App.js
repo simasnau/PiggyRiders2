@@ -17,6 +17,7 @@ import DeleteUser from "./components/LoginRegisterComponents/DeleteUser";
 import Challenges from "./components/ChallangesComponents/Challenge";
 import Leaderboard from "./components/LeaderboardComponents/Leaderboard";
 import AboutUs from "./components/AboutUs"
+import UserSettings from "./components/LoginRegisterComponents/UserSettings"
 
 export default class App extends Component {
   static displayName = App.name;
@@ -37,6 +38,7 @@ export default class App extends Component {
         <Route path="/Challenges" exact component={Challenges} />
         <Route path="/Leaderboard" exact component={Leaderboard} />
         <Route path="/deleteUser" exact component={DeleteUser}/>
+        <Route path="/userSettings" exact component={UserSettings}/>
       </Layout>
     );
   }

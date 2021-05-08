@@ -14,6 +14,9 @@ namespace SmartSaver.Service
 
         Task<ServiceResponse<List<UserInformation>>> GetAllUsers(); // WIP, man reikia gauti visus userius - Bartas
         Task<ServiceResponse<UserInformation>> DeleteUser(int ID);
+        bool UsernameExists(string username);
+        UserInformation UpdateUsername(string oldUsername, string newUsername);
+        UserInformation UpdatePassword(string username, string password);
 
 
     }

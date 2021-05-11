@@ -49,7 +49,12 @@ export default class UserSettings extends Component {
           Password: newUser.password
       })
     }).then(response => {
-      console.log(response)
+      if(response.ok){
+        alert("Successfully updated user details.")
+      }
+      else {
+        alert("Username might be taken or something wrong with connection to server")
+      }
         })    
 
   }

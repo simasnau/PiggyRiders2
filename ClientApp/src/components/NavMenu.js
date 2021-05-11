@@ -36,6 +36,7 @@ export class NavMenu extends Component {
                 {!this.loggedIn ? <li><a href={this.props.basename+"/sign-up"}>Sign Up</a></li>:null}
                 {this.loggedIn ? <li><a href={this.props.basename+"/log-in"} onClick={this.logoutClick}>Log Out</a></li> : null}
                 {this.loggedIn ?<li><a href={this.props.basename+"/deleteUser"}>Delete User</a></li>:null}
+                {this.loggedIn ?<li><a href={this.props.basename+"/userSettings"}>User Settings</a></li>:null}
                 <li className="divider"></li>
                 {this.loggedIn ?<li><a href={this.props.basename+"/BMInfo"}>Budget Manager</a></li>:null}
                 <li className="divider"></li>

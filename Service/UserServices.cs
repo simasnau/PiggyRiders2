@@ -71,7 +71,7 @@ namespace SmartSaver.Service
 
 
 
-        private bool UsernameExists(string username)
+        public bool UsernameExists(string username)
         {
             return _context.UserInfo.Any(e => e.Username == username);
         }
@@ -110,6 +110,26 @@ namespace SmartSaver.Service
             }
             return serviceResponse;
         }
+
+        public UserInformation UpdateUsername(string oldUsername, string newUsername){
+            var user=_context.UserInfo.SingleOrDefault(x => x.Username==oldUsername);
+            if(user!=null){
+                user.Username=newUsername;
+                _context.SaveChanges();
+                return user;
+            }
+            return null;
+        }
+        public UserInformation UpdatePassword(string username, string password){
+            var user=_context.UserInfo.SingleOrDefault(x => x.Username==username);
+            if(user!=null){
+                user.Password=password;
+                _context.SaveChanges();
+                return user;
+            }
+            return null;
+        }
+
     }
 
 

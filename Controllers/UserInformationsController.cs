@@ -75,6 +75,30 @@ namespace SmartSaver.Controllers
 
 
         }
+
+        // PUT: api/UserInformations
+        [HttpPut]
+        public async Task<ActionResult<UserInformation>> PutUserInformation(UserInformation user)
+        {
+            string username = _JWTService.GetUsername(Request.Cookies["token"]);
+            if (username != null && user.Username != null)
+            {
+                if (_userService.UsernameExists(user.Username) == false)
+                {
+                    var newUser = _userService.UpdateUsername(username, user.Username);
+                    return Ok();
+                }
+                else return BadRequest();
+
+            }
+            else if (username != null && user.Password != null)
+            {
+                _userService.UpdatePassword(username, user.Password);
+                return Ok();
+            }
+            return BadRequest();
+
+        }
     }
 }
 

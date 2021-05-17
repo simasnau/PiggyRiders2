@@ -26,9 +26,11 @@ export default class Login extends Component {
 
     fetch(URL+"/api/UserInformations/email", {
       method: "POST",
-      body: JSON.stringify({
-        Email: this.state.email
-      })
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.email)
     }).then(response => {
       if (response.ok) {
         alert("Email was sent to "+this.state.email)

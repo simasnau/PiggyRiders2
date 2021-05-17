@@ -1,0 +1,22 @@
+name: Build dotnet app
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup dotnet 5.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "5.0"
+      - name: Display dotnet version
+        run: dotnet --version
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --no-restore
+

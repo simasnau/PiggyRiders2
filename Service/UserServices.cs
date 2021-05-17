@@ -148,7 +148,7 @@ namespace SmartSaver.Service
                 var toAddress = new MailAddress(email, user.Username);
                 string fromPassword = Configuration["EmailSettings:Password"];
                 string subject = "Password Change";
-                string body = "Hello, you are reciving this email, because you requested to reset password on account associated with this email. Below is your new generated password. Dont forget to change it immediately after logging in.";
+                string body = "Hello, you are receiving this email, because you requested to reset password on account associated with this email. Below is your new generated password. Dont forget to change it immediately after logging in.\n";
                 body=body+RandomPassword();
                 var smtp = new SmtpClient
                 {

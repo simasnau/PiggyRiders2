@@ -168,9 +168,11 @@ namespace SmartSaver.Service
                 }
 
                 serviceResponse.Success=true;
-                return serviceResponse;
             }
-            else return null;
+            else {
+                serviceResponse.Success=false;
+            }
+            return serviceResponse;
         }
 
     }

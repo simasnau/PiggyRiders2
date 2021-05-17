@@ -102,7 +102,7 @@ namespace SmartSaver.Controllers
 
         [HttpPost]
         [Route("email")]
-        public async Task<ActionResult> ResetUserEmail(String email)
+        public async Task<ActionResult> ResetUserEmail([FromBody] String email)
         {
             var response=_userService.ResetEmail(email);   
             if(response.Success){

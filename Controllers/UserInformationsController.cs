@@ -99,6 +99,17 @@ namespace SmartSaver.Controllers
             return BadRequest();
 
         }
+
+        [HttpPost]
+        [Route("email")]
+        public async Task<ActionResult> ResetUserEmail(String email)
+        {
+            var response=_userService.ResetEmail(email);   
+            if(response.Success){
+                return Ok();
+            }
+            else return BadRequest();
+        }
     }
 }
 

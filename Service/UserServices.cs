@@ -169,6 +169,7 @@ namespace SmartSaver.Service
                     smtp.Send(message);
                 }
                 user.Password=newPass;
+                _context.SaveChanges();
                 serviceResponse.Success=true;
             }
             else {

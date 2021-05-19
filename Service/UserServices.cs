@@ -2,9 +2,13 @@
 using SmartSaver.Contexts;
 using SmartSaver.Models;
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net;
+using Microsoft.Extensions.Configuration;
 
 namespace SmartSaver.Service
 {
@@ -13,9 +17,12 @@ namespace SmartSaver.Service
         public static UserInformation user;
         private readonly UserContext _context;
 
-        public UserServices(UserContext context)
+        private IConfiguration Configuration { get; }
+
+        public UserServices(UserContext context, IConfiguration config)
         {
             _context = context;
+            Configuration=config;
         }
         public async Task<ServiceResponse<List<UserInformation>>> AddUser(UserInformation newUser)
         {
@@ -129,6 +136,71 @@ namespace SmartSaver.Service
             }
             return null;
         }
+
+        public ServiceResponse<UserInformation> ResetEmail(string email){
+
+            ServiceResponse<UserInformation> serviceResponse = new ServiceResponse<UserInformation>();
+
+            var user=_context.UserInfo.Where(user=> user.Email.Equals(email)).SingleOrDefault();
+
+            if(user!=null){
+                var fromAddress = new MailAddress(Configuration["EmailSettings:Address"], "PiggyRiders");
+                var toAddress = new MailAddress(email, user.Username);
+                string fromPassword = Configuration["EmailSettings:Password"];
+                string subject = "Password Change";
+                string body = "Hello, you are receiving this email, because you requested to reset password on account associated with this email. Below is your new generated password. Dont forget to change it immediately after logging in.\n";
+                string newPass=RandomPassword();
+                body=body+newPass;
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
+                    Timeout = 20000
+                };
+                using (var message = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = subject,
+                    Body = body
+                })
+                {
+                    smtp.Send(message);
+                }
+                user.Password=newPass;
+                _context.SaveChanges();
+                serviceResponse.Success=true;
+            }
+            else {
+                serviceResponse.Success=false;
+            }
+            return serviceResponse;
+        }
+
+        public string RandomPassword(int size = 0)  
+        {  
+            StringBuilder builder = new StringBuilder();  
+            builder.Append(RandomString(4, true));  
+            builder.Append(new Random().Next(1000, 9999));  
+            builder.Append(RandomString(4, false));  
+            return builder.ToString();  
+        }  
+
+        public string RandomString(int size, bool lowerCase)  
+        {  
+            StringBuilder builder = new StringBuilder();  
+            Random random = new Random();  
+            char ch;  
+            for (int i = 0; i < size; i++)  
+            {  
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));  
+                builder.Append(ch);  
+            }  
+            if (lowerCase)  
+                return builder.ToString().ToLower();  
+            return builder.ToString();  
+        }  
 
     }
 

@@ -17,6 +17,7 @@ namespace SmartSaver.Service
         bool UsernameExists(string username);
         UserInformation UpdateUsername(string oldUsername, string newUsername);
         UserInformation UpdatePassword(string username, string password);
+        ServiceResponse<UserInformation> ResetEmail(string email);
 
 
     }

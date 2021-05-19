@@ -4,6 +4,42 @@ import {URL} from "./../../Secrets";
 var token = "";
 
 export default class Login extends Component {
+  
+  constructor(props) {
+    super(props)
+    this.state = {email: ""};
+    this.handleEmailChange=this.handleEmailChange.bind(this)
+    this.onForgotPassword=this.onForgotPassword.bind(this)
+  }
+  
+  handleEmailChange(e) {
+    this.setState({email: e.target.value});
+  }
+  
+  onForgotPassword(e){
+    e.preventDefault()
+    if(this.state.email===""){
+      alert("Please enter email that you want to reset")
+      return
+    }
+
+
+    fetch(URL+"/api/UserInformations/email", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.email)
+    }).then(response => {
+      if (response.ok) {
+        alert("Email was sent to "+this.state.email)
+      } else {
+        alert("Failed to send email. Something went wrong. Please check your input and try again");
+      }
+    });
+  }
+
   onSubmit(e) {
 
     const newUser = {
@@ -56,6 +92,8 @@ export default class Login extends Component {
             ref="email"
             className="form-control"
             placeholder="Enter email"
+            value={this.state.email}
+            onChange={this.handleEmailChange}
           />
         </div>
 
@@ -86,7 +124,7 @@ export default class Login extends Component {
           Submit
         </button>
         <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
+          Forgot <a href="#" onClick={this.onForgotPassword}>password?</a>
         </p>
       </form>
     );
